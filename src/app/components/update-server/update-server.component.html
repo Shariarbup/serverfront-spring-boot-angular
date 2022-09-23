@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+     <div class="col-md-6 offset-md-3">
+         <form class="border m-3 p-3" (ngSubmit) ="onSubmit()">
+             <h1 class="text-center">Update Server</h1>
+             <div class="form-group">
+               <label for="exampleInputEmail1">IP Address:</label>
+               <input 
+               [(ngModel)]='customResponse.data.server.ipAddress'
+               required
+               name="ipAddress"
+               type="text" class="form-control"  placeholder="Enter IP Address">
+             </div> <br>
+             <div class="form-group">
+                 <label for="exampleInputEmail1">Name:</label>
+                 <input 
+                 [(ngModel)]='customResponse.data.server.name'
+                 required
+                 name="name"
+                 type="text" class="form-control"  placeholder="Enter name">
+               </div> <br>
+               <div class="form-group">
+                 <label for="exampleInputEmail1">Memory:</label>
+                 <input 
+                 [(ngModel)]='customResponse.data.server.memory'
+                 required
+                 name="memory"
+                 type="text" class="form-control"  placeholder="Enter memory size">
+               </div> <br>
+             <div class="form-group">
+               <label for="exampleInputPassword1">Type</label>
+               <input 
+              [(ngModel)]='customResponse.data.server.type'
+               required
+               name="type"
+               type="text" class="form-control"  placeholder="Enter server type">
+             </div><br>
+             <div class="form-group">
+                <label for="exampleInputPassword1">Status</label>
+                <input 
+               [(ngModel)]='customResponse.data.server.status'
+                required
+                name="status"
+                type="text" class="form-control">
+              </div><br>
+             <button type="submit" class="btn btn-primary">Update Server</button>
+           </form>
+     </div>
+    </div>
+ </div>
+ 
+
