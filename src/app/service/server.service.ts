@@ -41,11 +41,11 @@ export class ServerService {
           status === Status.ALL ? {...response, message: `Server filtered by ${status} status`}:
           {
             ...response, 
-            message: response.data.servers?.filter(server=> server.status === status).length > 0 ? 
+            message: response.data.servers.filter(server=> server.status === status).length > 0 ? 
             `Server filtered by ${status === Status.SERVER_UP ? 'SERVER_UP' : 'SERVER_DOWN'} status` :
             `No server ${status} found` ,
-            data:{servers : response.data.servers
-            ?.filter(server=> server.status === status)}        
+            data: { servers : response.data.servers
+            .filter(server=> server.status === status)}        
           }
         );
         subscriber.complete();

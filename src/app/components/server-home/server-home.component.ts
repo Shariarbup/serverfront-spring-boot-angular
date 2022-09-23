@@ -49,14 +49,9 @@ export class ServerHomeComponent implements OnInit {
       map(response=>{
         this.notifier.onDefault(response.message);
         this.dataSubject.next(response);
-        return {
-          dataState: DataState.LOADED_STATE,
-          appData: {...response, data: {servers: response.data.servers.reverse()}}
-        }
+        return {dataState: DataState.LOADED_STATE,appData: {...response, data: {servers: response.data.servers.reverse()}}}
       }),
-      startWith({  
-        dataState: DataState.LOADING_STATE
-      }),
+      startWith({dataState: DataState.LOADING_STATE }),
       catchError((error: string)=>{
         this.notifier.onError(error);
         return of({ dataState: DataState.ERROR_STATE, error: error});
