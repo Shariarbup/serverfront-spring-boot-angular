@@ -8,6 +8,7 @@ import { AppState } from 'src/app/interface/app-state';
 import { CustomResponse } from 'src/app/interface/custom-response';
 import { IReport } from 'src/app/interface/IReport';
 import { Server } from 'src/app/interface/server';
+import { User } from 'src/app/interface/user';
 import { NotificationService } from 'src/app/service/notification.service';
 import { ServerService } from 'src/app/service/server.service';
 
@@ -25,6 +26,25 @@ export class ServerHomeComponent implements OnInit {
     {id:2, name:"html"},
     {id:3, name:"csv"}
   ];
+ 
+  user:any ={
+    id: null,
+    name: null,
+    email: null,
+    password: null,
+    address:null
+  };
+  public server:any ={
+    id: null,
+    ipAddress: null,
+    name: null,
+    memory:null,
+    type: null,
+    imageUrl: null,
+    status: Status,
+    user: this.user
+  };
+  
   public reportId:number=0;
   public reportFormatname:string="";
   formModal: any;
@@ -41,6 +61,7 @@ export class ServerHomeComponent implements OnInit {
   constructor(private serverService: ServerService, private notifier: NotificationService, private router: Router) { }
 
   ngOnInit(): void {
+    this.server.user = this.user;
     this.formModal = new window.bootstrap.Modal(
       document.getElementById("addServerModal")
     );
@@ -96,7 +117,8 @@ export class ServerHomeComponent implements OnInit {
   
 saveServer(serverForm: NgForm): void {
   this.isLoading.next(true);
-    this.appState$ = this.serverService.saveServer$(serverForm.value as Server)
+  console.log(this.server)
+    this.appState$ = this.serverService.saveServer$(this.server)
     .pipe(
       map(response=>{
         this.dataSubject.next(

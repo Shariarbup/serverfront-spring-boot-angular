@@ -1,10 +1,11 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Status } from '../enum/Status.enum';
 import { CustomResponse } from '../interface/custom-response';
 import { Server } from '../interface/server';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +14,24 @@ export class ServerService {
   
   private readonly apiUrl = 'http://localhost:8080/api/v1/servers';
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient,private loginService:LoginService) { }
+ header = {
+    headers: new HttpHeaders()
+      .set('Authorization',  `Bearer ${this.loginService.getToken()}`).set('Content-Type', 'application/json')
+  }
   servers$ = <Observable<CustomResponse>> this.http.get<CustomResponse>(`${this.apiUrl}/`)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
   )
   
-  saveServer$ = (server: Server)=><Observable<CustomResponse>> this.http.post<CustomResponse>(`${this.apiUrl}/`,server)
+  saveServer$ = (server: any)=><Observable<CustomResponse>> this.http.post<CustomResponse>(`${this.apiUrl}/`,server,this.header)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
   )
   
-  pingServer$ = (ipAddress: string)=><Observable<CustomResponse>> this.http.get<CustomResponse>(`${this.apiUrl}/ping/${ipAddress}`)
+  pingServer$ = (ipAddress: string)=><Observable<CustomResponse>> this.http.get<CustomResponse>(`${this.apiUrl}/ping/${ipAddress}`,this.header)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
@@ -57,7 +61,7 @@ export class ServerService {
   )
 
 
-  deleteServer$ = (serverId: number)=><Observable<CustomResponse>> this.http.delete<CustomResponse>(`${this.apiUrl}/${serverId}`)
+  deleteServer$ = (serverId: number)=><Observable<CustomResponse>> this.http.delete<CustomResponse>(`${this.apiUrl}/${serverId}`,this.header)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
@@ -74,15 +78,15 @@ export class ServerService {
         
       }
     )
-    return this.http.get(`${this.apiUrl}/report/${reportFormatname}`);
+    return this.http.get(`${this.apiUrl}/report/${reportFormatname}`,this.header);
   }
 
   updateServer$(id:number, server:Server):Observable<Object>{
     console.log("This is from service: ",id, server)
-    return this.http.put(`${this.apiUrl}/${id}`,server);
+    return this.http.put(`${this.apiUrl}/${id}`,server,this.header);
   }
   getServerById(id:number):Observable<CustomResponse>{
-    return this.http.get<CustomResponse>(`${this.apiUrl}/${id}`);
+    return this.http.get<CustomResponse>(`${this.apiUrl}/${id}`,this.header);
   }
 
 

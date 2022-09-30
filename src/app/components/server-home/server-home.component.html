@@ -1,7 +1,7 @@
 <!-- <div>
     {{appState$ | async | json}}
 </div> -->
-<div class="container-xl">
+<div class="container-xl mt-1">
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
@@ -15,7 +15,7 @@
                                 <option value="ALL">Filter By Server Status</option>
                                 <option value="ALL">ALL</option>
                                 <option value="SERVER_UP">SERVER UP</option>
-                                <option value="SERVER_DOWN">SERVER_DOWN</option>
+                                <option value="SERVER_DOWN">SERVER DOWN</option>
                             </select>
                         </span>&nbsp;
                         <button (click)="printReportOfServer()" type="button" class="btn btn-primary">Print EXCEL Report</button>&nbsp;
@@ -56,7 +56,7 @@
                             <th>Name</th>
                             <th>Memory</th>
                             <th>Type</th>
-                            <th>Status</th>
+                            <th class="text-center">Status</th>
                             <th>Ping</th>
                             <th>Actions</th>
                         </tr>
@@ -68,9 +68,9 @@
                             <td>{{server.name}}</td>
                             <td>{{server.memory}}</td>
                             <td>{{server.type}}</td>
-                            <td>
-                                <span class="badge"
-                                [ngClass]="[server.status === Status.SERVER_UP ? ' badge-success' : ' badge-danger']">
+                            <td class="text-center">
+                                <span class="badge badge-info"
+                                [ngClass]="[server.status === Status.SERVER_UP ? 'badge-success bg-success' : 'badge-danger bg-danger']">
                                     {{server.status === Status.SERVER_UP ? 'SERVER UP' : 'SERVER DOWN'}}
                                 </span>
                             </td>
@@ -115,30 +115,46 @@ aria-hidden="true">
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label>User name: </label>
+                        <input type="text" [(ngModel)]="user.name" name="name" class="form-control" required>
+                    </div> <br>
+                    <div class="form-group">
+                        <label>User email: </label>
+                        <input type="text" [(ngModel)]="user.email" name="email" class="form-control" required>
+                    </div> <br>
+                    <div class="form-group">
+                        <label>User password: </label>
+                        <input type="text" [(ngModel)]="user.password" name="password" class="form-control" required>
+                    </div> <br>
+                    <div class="form-group">
+                        <label>User Address: </label>
+                        <input type="text" [(ngModel)]="user.address" name="address" class="form-control" required>
+                    </div> <br>
+                    <div class="form-group">
                         <label>IP</label>
-                        <input type="text" ngModel name="ipAddress" class="form-control" required>
+                        <input type="text" [(ngModel)]="server.ipAddress" name="ipAddress" class="form-control" required>
                     </div> <br>
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" ngModel name="name" class="form-control" required>
+                        <input type="text" [(ngModel)]="server.name" name="name" class="form-control" required>
                     </div><br>
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <label>Memory</label>
-                                <input type="text" ngModel name="memory" class="form-control" required>
+                                <input type="text" [(ngModel)]="server.memory" name="memory" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <label>Type</label>
-                                <input type="text" ngModel name="type" class="form-control" required>
+                                <input type="text" [(ngModel)]="server.type" name="type" class="form-control" required>
                             </div>
                         </div>
                     </div><br>
                     <div class="form-group">
                         <label>Status</label>
-                        <select ngModel="SERVER_DOWN" name="status" class="form-control" required>
+                        <select [(ngModel)]="server.status" name="status" class="form-control" required>
                             <option value="SERVER_UP">SERVER UP</option>
                             <option value="SERVER_DOWN">SERVER DOWN</option>
                         </select>

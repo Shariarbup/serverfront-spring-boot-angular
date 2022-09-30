@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mt-0">
     <div class="container">
       <a class="navbar-brand" routerLink="/home">Home</a>
       <button
@@ -17,6 +17,8 @@
           <a class="nav-item nav-link active" routerLink="/server-home"
             >Servers </a
           >
+          <a class="nav-item nav-link active" *ngIf="!loggedIn" routerLink="/login">Login</a>
+        <a class="nav-item nav-link active" *ngIf="loggedIn" (click)="logoutUser()" routerLink="/login">Logout</a>
         </div>
       </div>
     </div>

@@ -11,6 +11,10 @@ import {FormsModule} from '@angular/forms'
 import { NotificationModule } from './notification/notification.module';
 import { NotifierModule } from 'angular-notifier';
 import { UpdateServerComponent } from './components/update-server/update-server.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
+import { LoginService } from './service/login.service';
+import { ServerService } from './service/server.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,8 @@ import { UpdateServerComponent } from './components/update-server/update-server.
     NavbarComponent,
     ServerHomeComponent,
     HomeComponent,
-    UpdateServerComponent
+    UpdateServerComponent,
+    LoginComponent
   ],
 
   imports: [
@@ -29,7 +34,7 @@ import { UpdateServerComponent } from './components/update-server/update-server.
     FormsModule,
     NotifierModule
   ],
-  providers: [],
+  providers: [AuthGuardGuard,LoginService,ServerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
