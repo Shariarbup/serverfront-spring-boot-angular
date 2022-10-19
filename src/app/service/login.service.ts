@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class LoginService {
-baseUrl = "http://localhost:8080/api/v1/auth/login";
+baseUrl = "http://localhost:8082/api/v1/auth/login";
 httOptions = {
   headers: new HttpHeaders().set( 'Content-Type', 'application/json')
 }

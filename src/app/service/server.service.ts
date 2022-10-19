@@ -12,7 +12,7 @@ import { LoginService } from './login.service';
 })
 export class ServerService {
   
-  private readonly apiUrl = 'http://localhost:8080/api/v1/servers';
+  private readonly apiUrl = 'http://localhost:8082/api/v1/servers';
 
   constructor(private http: HttpClient,private loginService:LoginService) { }
  header = {

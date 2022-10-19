@@ -1,13 +1,6 @@
 {
-    "/url": {
-        "target": "http://192.168.55.105:8080/",
-        "secure": false,
-        "logLevel": "debug",
-        "pathRewirte":{
-            "^/url": ""
-        },
-        "changeOrigin": true
-
+    "/api": {
+    "target": "http://localhost:8082",
+    "secure": false
     }
-    
 }
